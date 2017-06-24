@@ -5,10 +5,7 @@ var inquirer = require('inquirer');
 var fs = require('fs');
 var keys = require('./keys.js');
 var twitter = new Twitter(keys.twitterKeys);
-var spotify = new Spotify({
-        id: "f0f05c75e96142f6bb5e48758aa7ed19",
-        secret: "41cb634714784526a02074f89c483b2c",
-});
+
 
 function launch(){
 inquirer.prompt([
