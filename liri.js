@@ -10,6 +10,7 @@ var spotify = new Spotify({
         secret: "41cb634714784526a02074f89c483b2c",
 });
 
+function launch(){
 inquirer.prompt([
     {   type: "list",
         name: "action",
@@ -21,6 +22,9 @@ inquirer.prompt([
     console.log(input.action);
     inputChoices[action]();
 });
+};
+
+launch();
 
 var inputChoices = {
 
@@ -30,6 +34,7 @@ var inputChoices = {
             for (i=0; i<tweets.length; i++){
                 console.log(tweets[i].user.screen_name + ": " + tweets[i].text);  
             }
+            again();
         });
     },
 
@@ -40,21 +45,24 @@ var inputChoices = {
                 type:"input", 
                 name:"song", 
                 message:"What song do you want to look up?", 
-                default: "American Girl"
             }
         ]).then(function(input){
+            var spotify = new Spotify({
+                id: "f0f05c75e96142f6bb5e48758aa7ed19",
+                secret: "41cb634714784526a02074f89c483b2c",
+            });
             spotify.search({ type: 'track', query: input.song, limit: "1" })
             .then(function(response) {
                 console.log("Song: "    + response.tracks.items[0].name); 
                 console.log("Artist: " + response.tracks.items[0].artists[0].name);
                 console.log("Album: "   + response.tracks.items[0].album.name);
                 console.log("Preview: " + response.tracks.items[0].preview_url);
+                again();
             })
             .catch(function(err) {
                 console.log(err);
             });
         });
-
      },
 
 
@@ -77,7 +85,7 @@ var inputChoices = {
                     console.log("Language: "     + JSON.parse(body).Language);
                     console.log("Country: "      + JSON.parse(body).Country);
                     console.log("Website: "      + JSON.parse(body).Website);
-
+                    again();
                 }
             });
         });
@@ -87,6 +95,10 @@ var inputChoices = {
     "Random": function(){
         var action, song; 
         fs.readFile("random.txt", "utf-8", function(err, data){
+            var spotify = new Spotify({
+                id: "f0f05c75e96142f6bb5e48758aa7ed19",
+                secret: "41cb634714784526a02074f89c483b2c",
+                });
             if(err){
                 return undefined;
             }
@@ -100,12 +112,24 @@ var inputChoices = {
                 console.log("Artist: " + response.tracks.items[0].artists[0].name);
                 console.log("Album: "   + response.tracks.items[0].album.name);
                 console.log("Preview: " + response.tracks.items[0].preview_url);
+                again();
             })
             .catch(function(err) {
                 console.log(err);
             });
         })
-
      },
 	
+}
+
+function again() {
+    inquirer.prompt([{
+        type: 'confirm',
+        name: 'playAgain',
+        message: 'Wanna go again?'
+    }]).then(function(answers) {
+        if(answers.playAgain) {
+            launch();
+        }
+    })
 }
