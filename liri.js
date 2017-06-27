@@ -28,7 +28,7 @@ var inputChoices = {
 	"Get Tweets": function(){ 
         twitter.get('statuses/user_timeline',{count: '20'}, function(error, tweets, response) {
             if(error) throw error;
-            for (i=0; i<tweets.length; i++){
+            for (var i=0; i<tweets.length; i++){
                 console.log(tweets[i].user.screen_name + ": " + tweets[i].text);  
             }
             again();
