@@ -1,5 +1,5 @@
 console.log('this is loaded');
-
+// Loading my twitter keys so the APi works
 exports.twitterKeys = {
   consumer_key: '67pb89B6XDNmlzkjzmEmejQYN',
   consumer_secret: 'c3RjUjFiB4wmVqMBqoobXqiG3l6TxVKaCsqWafCilOg6fxigBi',
