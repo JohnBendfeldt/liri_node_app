@@ -1,4 +1,4 @@
-console.log('this is loaded');
+console.log('Welcome!');
 // Loading my twitter keys so the APi works
 exports.twitterKeys = {
   consumer_key: '67pb89B6XDNmlzkjzmEmejQYN',
