@@ -8,7 +8,7 @@ var keys = require('./keys.js');
 var twitter = new Twitter(keys.twitterKeys);
 
 // Establishes how the app starts with a prompt
-(function launch(){
+function launch(){
 inquirer.prompt([
     {   type: "list",
         name: "action",
@@ -21,9 +21,8 @@ inquirer.prompt([
     console.log(input.action);
     inputChoices[action]();
 });
-}());
-// Launches the app essentially
-
+};
+launch();
 // The input choices that gives the user infromation
 var inputChoices = {
 
